@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidProject</string>
+
+    <string-array name="expense_categories">
+        <item>식비</item>
+        <item>교통</item>
+        <item>문화생활</item>
+        <item>기타</item>
+    </string-array>
+</resources>
