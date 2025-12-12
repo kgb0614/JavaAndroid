@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 전체 구조를 담당하는 루트 레이아웃입니다.
-세로 방향(vertical)으로 위젯을 차곡차곡 쌓는 LinearLayout을 사용.
+세로 방향으로 리니어 레이아웃을 사용.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
