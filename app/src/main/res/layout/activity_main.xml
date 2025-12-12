@@ -1,55 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+전체 구조를 담당하는 루트 레이아웃입니다.
+세로 방향(vertical)으로 위젯을 차곡차곡 쌓는 LinearLayout을 사용.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
     tools:context=".MainActivity">
 
+    <!-- 1. 월별 총 지출액 표시 영역 -->
     <TextView
-        android:id="@+id/budgetTitleTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/monthlyTotalTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="이번 달 예산"
+        android:background="#00796B"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="이번 달 총 지출: 0원"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <ProgressBar
-        android:id="@+id/budgetProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <!-- 2. 날짜 선택 영역 -->
+    <DatePicker
+        android:id="@+id/datePicker"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_below="@+id/budgetTitleTextView"
-        android:layout_alignStart="@+id/budgetTitleTextView"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
 
+    <!-- 3. 선택한 날짜의 지출 내역 타이틀 -->
     <TextView
-        android:id="@+id/budgetTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/budgetProgressBar"
-        android:layout_alignEnd="@+id/budgetProgressBar"
-        android:layout_marginTop="4dp"  />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/expenseRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/budgetTextView"
-        android:layout_marginTop="16dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addExpenseFab"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:contentDescription="새 지출 내역 추가" />
+        android:background="#2196F3"
+        android:padding="12dp"
+        android:text="선택한 날짜의 지출 내역"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-</RelativeLayout>
+    <!--
+    4. 지출 내역 목록 표시 영역
+    내용이 많아져도 스크롤이 가능하도록 ScrollView로 감쌌습니다.
+    layout_weight 속성으로 남는 세로 공간을 모두 이 영역이 차지하도록 만듭니다.
+    -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/white"
+        android:padding="8dp">
+
+        <!--
+        자바 코드에서 동적으로 지출 내역들이 추가될 컨테이너입니다.
+        처음에는 비어있습니다.
+        -->
+        <LinearLayout
+            android:id="@+id/expenseListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </ScrollView>
+
+    <!-- 5. '내역 추가' 버튼 -->
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="#2196F3"
+        android:text="내역 추가"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
